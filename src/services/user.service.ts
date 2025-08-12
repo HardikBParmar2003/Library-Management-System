@@ -1,5 +1,4 @@
-import { use } from "react";
-import { Prisma } from "../generated/prisma";
+import { Request } from "express";
 import { CreateUSer, User } from "../interface/user.interface";
 import { userRepository } from "../repositories/user.repository";
 
@@ -62,6 +61,14 @@ export const userService = {
       } else {
         return false;
       }
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async searchUser(req: Request) {
+    try {
+      return await userRepository.searchUser(req);
     } catch (error) {
       throw error;
     }

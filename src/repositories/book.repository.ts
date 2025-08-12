@@ -1,5 +1,6 @@
 import { Book, CreateBook } from "../interface/book.interface";
 import { PrismaClient } from "../generated/prisma";
+import { Request } from "express";
 const prisma = new PrismaClient();
 
 export const bookRepository = {
@@ -51,6 +52,42 @@ export const bookRepository = {
           id,
         },
       });
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async serachBook(req: Request) {
+    try {
+      const page: number = Number(req.query.page) || 1;
+      const orderBy: string = String(req.query.orderBy) || "asc";
+      const limit: number = Number(req.query.limit) || 5;
+      const searchValue: string = req.query.searchValue as string;
+      const skip: number = (page - 1) * limit;
+      const [bookData, total] = await Promise.all([
+        prisma.book.findMany({
+          where: {
+            book_name: {
+              contains: `${searchValue}`,
+              mode: "insensitive",
+            },
+          },
+          skip,
+          take: limit,
+        }),
+        prisma.book.count({
+          where: {
+            book_name: {
+              contains: `${searchValue}`,
+              mode: "insensitive",
+            },
+          },
+        }),
+      ]);
+      return {
+        book: bookData,
+        totalRecords: total,
+      };
     } catch (error) {
       throw error;
     }

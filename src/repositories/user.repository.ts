@@ -1,3 +1,4 @@
+import { Request } from "express";
 import { PrismaClient, User } from "../generated/prisma";
 import { CreateUSer } from "../interface/user.interface";
 const prisma = new PrismaClient();
@@ -64,6 +65,42 @@ export const userRepository = {
           id,
         },
       });
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async searchUser(req: Request) {
+    try {
+      const page: number = Number(req.query.page) || 1;
+      const orderBy: string = String(req.query.orderBy) || "asc";
+      const limit: number = Number(req.query.limit) || 5;
+      const searchValue: string = req.query.searchValue as string;
+      const skip: number = (page - 1) * limit;
+      const [userData, total] = await Promise.all([
+        prisma.user.findMany({
+          where: {
+            first_name: {
+              contains: `${searchValue}`,
+              mode: "insensitive",
+            },
+          },
+          skip,
+          take: limit,
+        }),
+        prisma.user.count({
+          where: {
+            first_name: {
+              contains: `${searchValue}`,
+              mode: "insensitive",
+            },
+          },
+        }),
+      ]);
+      return {
+        user: userData,
+        totalRecords: total,
+      };
     } catch (error) {
       throw error;
     }

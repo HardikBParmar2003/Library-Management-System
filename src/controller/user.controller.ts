@@ -101,13 +101,32 @@ export const userController = {
     }
   },
 
+  async searchUser(req: Request, res: Response) {
+    try {
+      const userData: {
+        user: User[];
+        totalRecords: number;
+      } = await userService.searchUser(req);
+      res
+        .status(200)
+        .json({ data: userData, message: "Data retrieved successfully" });
+    } catch (error) {
+      res.status(5000).json({
+        data: null,
+        message: `Something went wrong error is: ${error}`,
+      });
+    }
+  },
+
   async getBorrowedUser(req: Request, res: Response) {
     try {
       const book_id = Number(req.params.book_id);
       const book: Book | null = await bookService.getBookById(book_id);
       if (book) {
-        const borrowedUser = await userService.getBorrowedUser(book_id)
-        res.status(200).json({data:borrowedUser,message:"Data fetched successfully"})
+        const borrowedUser = await userService.getBorrowedUser(book_id);
+        res
+          .status(200)
+          .json({ data: borrowedUser, message: "Data fetched successfully" });
       } else {
         res.status(404).json({ data: null, message: "No books found" });
       }
@@ -124,8 +143,10 @@ export const userController = {
       const book_id = Number(req.params.book_id);
       const book: Book | null = await bookService.getBookById(book_id);
       if (book) {
-        const borrowedUser = await userService.getReturnedUser(book_id)
-        res.status(200).json({data:borrowedUser,message:"Data fetched successfully"})
+        const borrowedUser = await userService.getReturnedUser(book_id);
+        res
+          .status(200)
+          .json({ data: borrowedUser, message: "Data fetched successfully" });
       } else {
         res.status(404).json({ data: null, message: "No books found" });
       }

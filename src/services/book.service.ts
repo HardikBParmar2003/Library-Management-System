@@ -1,3 +1,4 @@
+import { Request } from "express";
 import { Book, CreateBook } from "../interface/book.interface";
 import { bookRepository } from "../repositories/book.repository";
 
@@ -10,7 +11,8 @@ export const bookService = {
     }
   },
 
-  async getBookById(id: number) {``
+  async getBookById(id: number) {
+    ``;
     try {
       return await bookRepository.getBookById(id);
     } catch (error) {
@@ -37,6 +39,14 @@ export const bookService = {
   async deleteBook(id: number) {
     try {
       return await bookRepository.deleteBook(id);
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async searchBook(req: Request) {
+    try {
+      return await bookRepository.serachBook(req);
     } catch (error) {
       throw error;
     }

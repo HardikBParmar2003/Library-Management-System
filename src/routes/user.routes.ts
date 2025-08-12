@@ -13,32 +13,44 @@ userRouter.post(
   validationMiddleware.validateCreateUser,
   userController.createUser
 );
+
 userRouter.get(
   "/getUserById/:id",
   adminMiddleware.isAuthorizedAdmin,
   userController.getUserById
 );
+
 userRouter.get(
   "/getAllUser",
   adminMiddleware.isAuthorizedAdmin,
   userController.getAllUser
 );
+
 userRouter.put(
   "/updateUser/:id",
   adminMiddleware.isAuthorizedAdmin,
   validationMiddleware.validateUpdateUser,
   userController.updateUser
 );
+
 userRouter.delete(
   "/deleteUser/:id",
   adminMiddleware.isAuthorizedAdmin,
   userController.deleteUser
 );
+
+userRouter.post(
+  "/searchUser",
+  adminMiddleware.isAuthorizedAdmin,
+  userController.searchUser
+);
+
 userRouter.get(
   "/getBorrowedUser/:book_id",
   adminMiddleware.isAuthorizedAdmin,
   userController.getBorrowedUser
 );
+
 userRouter.get(
   "/getReturnedUser/:book_id",
   adminMiddleware.isAuthorizedAdmin,

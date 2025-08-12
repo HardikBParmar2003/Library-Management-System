@@ -98,6 +98,23 @@ export const bookController = {
     }
   },
 
+  async searchBook(req: Request, res: Response) {
+    try {
+      const bookData: {
+        book: Book[];
+        totalRecords: number;
+      } = await bookService.searchBook(req);
+      res
+        .status(200)
+        .json({ data: bookData, message: "Data retrieved successfully" });
+    } catch (error) {
+      res.status(5000).json({
+        data: null,
+        message: `Something went wrong error is: ${error}`,
+      });
+    }
+  },
+
   async getBorrowedBooks(req: Request, res: Response) {
     try {
       const id = Number(req.params.id);
