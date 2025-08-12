@@ -64,4 +64,16 @@ export const userBookRepository = {
       throw error;
     }
   },
+
+  async checkPenalty(id: number) {
+    try {
+      return await prisma.user_Book.findUnique({
+        where: {
+          id,
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+  },
 };

@@ -11,46 +11,52 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Admin{
-  id            Int      @id     @default(autoincrement())
-  first_name    String      
-  last_name     String
-  email         String  @unique
-  password      String  
-  created_at    DateTime        @default(now())
-
+enum Status {
+  PAID
+  UNPAID
 }
 
-model User{
-  id            Int     @id     @default(autoincrement())
-  first_name    String  
-  last_name     String
-  email         String  @unique
-  contact_no    String
-  address       String
-  created_at    DateTime      @default(now())
-  deleted_at    DateTime?
+model Admin {
+  id         Int      @id @default(autoincrement())
+  first_name String
+  last_name  String
+  email      String   @unique
+  password   String
+  created_at DateTime @default(now())
+}
+
+model User {
+  id             Int         @id @default(autoincrement())
+  first_name     String
+  last_name      String
+  email          String      @unique
+  contact_no     String
+  address        String
+  created_at     DateTime    @default(now())
+  deleted_at     DateTime?
   borrowed_books User_Book[]
 }
 
-model Book{
-  id            Int   @id     @default(autoincrement())
-  book_name     String
-  author_name   String
+model Book {
+  id                 Int         @id @default(autoincrement())
+  book_name          String
+  author_name        String
   available_quantity Int
-  created_at    DateTime      @default(now())
-  deleted_at    DateTime?
-  borrowed_by   User_Book[]
+  created_at         DateTime    @default(now())
+  deleted_at         DateTime?
+  borrowed_by        User_Book[]
 }
 
-model User_Book{
-  id            Int   @id     @default(autoincrement())
-  user_id       Int
-  user          User  @relation(fields:[user_id],references:[id])
-  book_id       Int
-  book          Book  @relation(fields:[book_id],references:[id])
-  borrow_date   DateTime      @default(now())
-  return_date   DateTime? 
-  created_at    DateTime      @default(now())
-
+model User_Book {
+  id             Int       @id @default(autoincrement())
+  user_id        Int
+  user           User      @relation(fields: [user_id], references: [id],onDelete: Cascade,onUpdate: Cascade)
+  book_id        Int
+  book           Book      @relation(fields: [book_id], references: [id],onDelete: Cascade,onUpdate: Cascade)
+  borrow_date    DateTime  @default(now())
+  due_date       DateTime
+  return_date    DateTime?
+  created_at     DateTime  @default(now())
+  penalty_amount Int       @default(0)
+  penalty_status Status?
 }

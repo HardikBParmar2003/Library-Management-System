@@ -35,6 +35,23 @@ export type Book = $Result.DefaultSelection<Prisma.$BookPayload>
 export type User_Book = $Result.DefaultSelection<Prisma.$User_BookPayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const Status: {
+  PAID: 'PAID',
+  UNPAID: 'UNPAID'
+};
+
+export type Status = (typeof Status)[keyof typeof Status]
+
+}
+
+export type Status = $Enums.Status
+
+export const Status: typeof $Enums.Status
+
+/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
@@ -4538,12 +4555,14 @@ export namespace Prisma {
     id: number | null
     user_id: number | null
     book_id: number | null
+    penalty_amount: number | null
   }
 
   export type User_BookSumAggregateOutputType = {
     id: number | null
     user_id: number | null
     book_id: number | null
+    penalty_amount: number | null
   }
 
   export type User_BookMinAggregateOutputType = {
@@ -4551,8 +4570,11 @@ export namespace Prisma {
     user_id: number | null
     book_id: number | null
     borrow_date: Date | null
+    due_date: Date | null
     return_date: Date | null
     created_at: Date | null
+    penalty_amount: number | null
+    penalty_status: $Enums.Status | null
   }
 
   export type User_BookMaxAggregateOutputType = {
@@ -4560,8 +4582,11 @@ export namespace Prisma {
     user_id: number | null
     book_id: number | null
     borrow_date: Date | null
+    due_date: Date | null
     return_date: Date | null
     created_at: Date | null
+    penalty_amount: number | null
+    penalty_status: $Enums.Status | null
   }
 
   export type User_BookCountAggregateOutputType = {
@@ -4569,8 +4594,11 @@ export namespace Prisma {
     user_id: number
     book_id: number
     borrow_date: number
+    due_date: number
     return_date: number
     created_at: number
+    penalty_amount: number
+    penalty_status: number
     _all: number
   }
 
@@ -4579,12 +4607,14 @@ export namespace Prisma {
     id?: true
     user_id?: true
     book_id?: true
+    penalty_amount?: true
   }
 
   export type User_BookSumAggregateInputType = {
     id?: true
     user_id?: true
     book_id?: true
+    penalty_amount?: true
   }
 
   export type User_BookMinAggregateInputType = {
@@ -4592,8 +4622,11 @@ export namespace Prisma {
     user_id?: true
     book_id?: true
     borrow_date?: true
+    due_date?: true
     return_date?: true
     created_at?: true
+    penalty_amount?: true
+    penalty_status?: true
   }
 
   export type User_BookMaxAggregateInputType = {
@@ -4601,8 +4634,11 @@ export namespace Prisma {
     user_id?: true
     book_id?: true
     borrow_date?: true
+    due_date?: true
     return_date?: true
     created_at?: true
+    penalty_amount?: true
+    penalty_status?: true
   }
 
   export type User_BookCountAggregateInputType = {
@@ -4610,8 +4646,11 @@ export namespace Prisma {
     user_id?: true
     book_id?: true
     borrow_date?: true
+    due_date?: true
     return_date?: true
     created_at?: true
+    penalty_amount?: true
+    penalty_status?: true
     _all?: true
   }
 
@@ -4706,8 +4745,11 @@ export namespace Prisma {
     user_id: number
     book_id: number
     borrow_date: Date
+    due_date: Date
     return_date: Date | null
     created_at: Date
+    penalty_amount: number
+    penalty_status: $Enums.Status | null
     _count: User_BookCountAggregateOutputType | null
     _avg: User_BookAvgAggregateOutputType | null
     _sum: User_BookSumAggregateOutputType | null
@@ -4734,8 +4776,11 @@ export namespace Prisma {
     user_id?: boolean
     book_id?: boolean
     borrow_date?: boolean
+    due_date?: boolean
     return_date?: boolean
     created_at?: boolean
+    penalty_amount?: boolean
+    penalty_status?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     book?: boolean | BookDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user_Book"]>
@@ -4745,8 +4790,11 @@ export namespace Prisma {
     user_id?: boolean
     book_id?: boolean
     borrow_date?: boolean
+    due_date?: boolean
     return_date?: boolean
     created_at?: boolean
+    penalty_amount?: boolean
+    penalty_status?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     book?: boolean | BookDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user_Book"]>
@@ -4756,8 +4804,11 @@ export namespace Prisma {
     user_id?: boolean
     book_id?: boolean
     borrow_date?: boolean
+    due_date?: boolean
     return_date?: boolean
     created_at?: boolean
+    penalty_amount?: boolean
+    penalty_status?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     book?: boolean | BookDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user_Book"]>
@@ -4767,11 +4818,14 @@ export namespace Prisma {
     user_id?: boolean
     book_id?: boolean
     borrow_date?: boolean
+    due_date?: boolean
     return_date?: boolean
     created_at?: boolean
+    penalty_amount?: boolean
+    penalty_status?: boolean
   }
 
-  export type User_BookOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "book_id" | "borrow_date" | "return_date" | "created_at", ExtArgs["result"]["user_Book"]>
+  export type User_BookOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "book_id" | "borrow_date" | "due_date" | "return_date" | "created_at" | "penalty_amount" | "penalty_status", ExtArgs["result"]["user_Book"]>
   export type User_BookInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     book?: boolean | BookDefaultArgs<ExtArgs>
@@ -4796,8 +4850,11 @@ export namespace Prisma {
       user_id: number
       book_id: number
       borrow_date: Date
+      due_date: Date
       return_date: Date | null
       created_at: Date
+      penalty_amount: number
+      penalty_status: $Enums.Status | null
     }, ExtArgs["result"]["user_Book"]>
     composites: {}
   }
@@ -5227,8 +5284,11 @@ export namespace Prisma {
     readonly user_id: FieldRef<"User_Book", 'Int'>
     readonly book_id: FieldRef<"User_Book", 'Int'>
     readonly borrow_date: FieldRef<"User_Book", 'DateTime'>
+    readonly due_date: FieldRef<"User_Book", 'DateTime'>
     readonly return_date: FieldRef<"User_Book", 'DateTime'>
     readonly created_at: FieldRef<"User_Book", 'DateTime'>
+    readonly penalty_amount: FieldRef<"User_Book", 'Int'>
+    readonly penalty_status: FieldRef<"User_Book", 'Status'>
   }
     
 
@@ -5700,8 +5760,11 @@ export namespace Prisma {
     user_id: 'user_id',
     book_id: 'book_id',
     borrow_date: 'borrow_date',
+    due_date: 'due_date',
     return_date: 'return_date',
-    created_at: 'created_at'
+    created_at: 'created_at',
+    penalty_amount: 'penalty_amount',
+    penalty_status: 'penalty_status'
   };
 
   export type User_BookScalarFieldEnum = (typeof User_BookScalarFieldEnum)[keyof typeof User_BookScalarFieldEnum]
@@ -5775,6 +5838,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Status'
+   */
+  export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status'>
+    
+
+
+  /**
+   * Reference to a field of type 'Status[]'
+   */
+  export type ListEnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status[]'>
     
 
 
@@ -5996,8 +6073,11 @@ export namespace Prisma {
     user_id?: IntFilter<"User_Book"> | number
     book_id?: IntFilter<"User_Book"> | number
     borrow_date?: DateTimeFilter<"User_Book"> | Date | string
+    due_date?: DateTimeFilter<"User_Book"> | Date | string
     return_date?: DateTimeNullableFilter<"User_Book"> | Date | string | null
     created_at?: DateTimeFilter<"User_Book"> | Date | string
+    penalty_amount?: IntFilter<"User_Book"> | number
+    penalty_status?: EnumStatusNullableFilter<"User_Book"> | $Enums.Status | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     book?: XOR<BookScalarRelationFilter, BookWhereInput>
   }
@@ -6007,8 +6087,11 @@ export namespace Prisma {
     user_id?: SortOrder
     book_id?: SortOrder
     borrow_date?: SortOrder
+    due_date?: SortOrder
     return_date?: SortOrderInput | SortOrder
     created_at?: SortOrder
+    penalty_amount?: SortOrder
+    penalty_status?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     book?: BookOrderByWithRelationInput
   }
@@ -6021,8 +6104,11 @@ export namespace Prisma {
     user_id?: IntFilter<"User_Book"> | number
     book_id?: IntFilter<"User_Book"> | number
     borrow_date?: DateTimeFilter<"User_Book"> | Date | string
+    due_date?: DateTimeFilter<"User_Book"> | Date | string
     return_date?: DateTimeNullableFilter<"User_Book"> | Date | string | null
     created_at?: DateTimeFilter<"User_Book"> | Date | string
+    penalty_amount?: IntFilter<"User_Book"> | number
+    penalty_status?: EnumStatusNullableFilter<"User_Book"> | $Enums.Status | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     book?: XOR<BookScalarRelationFilter, BookWhereInput>
   }, "id">
@@ -6032,8 +6118,11 @@ export namespace Prisma {
     user_id?: SortOrder
     book_id?: SortOrder
     borrow_date?: SortOrder
+    due_date?: SortOrder
     return_date?: SortOrderInput | SortOrder
     created_at?: SortOrder
+    penalty_amount?: SortOrder
+    penalty_status?: SortOrderInput | SortOrder
     _count?: User_BookCountOrderByAggregateInput
     _avg?: User_BookAvgOrderByAggregateInput
     _max?: User_BookMaxOrderByAggregateInput
@@ -6049,8 +6138,11 @@ export namespace Prisma {
     user_id?: IntWithAggregatesFilter<"User_Book"> | number
     book_id?: IntWithAggregatesFilter<"User_Book"> | number
     borrow_date?: DateTimeWithAggregatesFilter<"User_Book"> | Date | string
+    due_date?: DateTimeWithAggregatesFilter<"User_Book"> | Date | string
     return_date?: DateTimeNullableWithAggregatesFilter<"User_Book"> | Date | string | null
     created_at?: DateTimeWithAggregatesFilter<"User_Book"> | Date | string
+    penalty_amount?: IntWithAggregatesFilter<"User_Book"> | number
+    penalty_status?: EnumStatusNullableWithAggregatesFilter<"User_Book"> | $Enums.Status | null
   }
 
   export type AdminCreateInput = {
@@ -6257,8 +6349,11 @@ export namespace Prisma {
 
   export type User_BookCreateInput = {
     borrow_date?: Date | string
+    due_date: Date | string
     return_date?: Date | string | null
     created_at?: Date | string
+    penalty_amount?: number
+    penalty_status?: $Enums.Status | null
     user: UserCreateNestedOneWithoutBorrowed_booksInput
     book: BookCreateNestedOneWithoutBorrowed_byInput
   }
@@ -6268,14 +6363,20 @@ export namespace Prisma {
     user_id: number
     book_id: number
     borrow_date?: Date | string
+    due_date: Date | string
     return_date?: Date | string | null
     created_at?: Date | string
+    penalty_amount?: number
+    penalty_status?: $Enums.Status | null
   }
 
   export type User_BookUpdateInput = {
     borrow_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_date?: DateTimeFieldUpdateOperationsInput | Date | string
     return_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    penalty_amount?: IntFieldUpdateOperationsInput | number
+    penalty_status?: NullableEnumStatusFieldUpdateOperationsInput | $Enums.Status | null
     user?: UserUpdateOneRequiredWithoutBorrowed_booksNestedInput
     book?: BookUpdateOneRequiredWithoutBorrowed_byNestedInput
   }
@@ -6285,8 +6386,11 @@ export namespace Prisma {
     user_id?: IntFieldUpdateOperationsInput | number
     book_id?: IntFieldUpdateOperationsInput | number
     borrow_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_date?: DateTimeFieldUpdateOperationsInput | Date | string
     return_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    penalty_amount?: IntFieldUpdateOperationsInput | number
+    penalty_status?: NullableEnumStatusFieldUpdateOperationsInput | $Enums.Status | null
   }
 
   export type User_BookCreateManyInput = {
@@ -6294,14 +6398,20 @@ export namespace Prisma {
     user_id: number
     book_id: number
     borrow_date?: Date | string
+    due_date: Date | string
     return_date?: Date | string | null
     created_at?: Date | string
+    penalty_amount?: number
+    penalty_status?: $Enums.Status | null
   }
 
   export type User_BookUpdateManyMutationInput = {
     borrow_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_date?: DateTimeFieldUpdateOperationsInput | Date | string
     return_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    penalty_amount?: IntFieldUpdateOperationsInput | number
+    penalty_status?: NullableEnumStatusFieldUpdateOperationsInput | $Enums.Status | null
   }
 
   export type User_BookUncheckedUpdateManyInput = {
@@ -6309,8 +6419,11 @@ export namespace Prisma {
     user_id?: IntFieldUpdateOperationsInput | number
     book_id?: IntFieldUpdateOperationsInput | number
     borrow_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_date?: DateTimeFieldUpdateOperationsInput | Date | string
     return_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    penalty_amount?: IntFieldUpdateOperationsInput | number
+    penalty_status?: NullableEnumStatusFieldUpdateOperationsInput | $Enums.Status | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -6551,6 +6664,13 @@ export namespace Prisma {
     available_quantity?: SortOrder
   }
 
+  export type EnumStatusNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumStatusNullableFilter<$PrismaModel> | $Enums.Status | null
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -6566,14 +6686,18 @@ export namespace Prisma {
     user_id?: SortOrder
     book_id?: SortOrder
     borrow_date?: SortOrder
+    due_date?: SortOrder
     return_date?: SortOrder
     created_at?: SortOrder
+    penalty_amount?: SortOrder
+    penalty_status?: SortOrder
   }
 
   export type User_BookAvgOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
     book_id?: SortOrder
+    penalty_amount?: SortOrder
   }
 
   export type User_BookMaxOrderByAggregateInput = {
@@ -6581,8 +6705,11 @@ export namespace Prisma {
     user_id?: SortOrder
     book_id?: SortOrder
     borrow_date?: SortOrder
+    due_date?: SortOrder
     return_date?: SortOrder
     created_at?: SortOrder
+    penalty_amount?: SortOrder
+    penalty_status?: SortOrder
   }
 
   export type User_BookMinOrderByAggregateInput = {
@@ -6590,14 +6717,28 @@ export namespace Prisma {
     user_id?: SortOrder
     book_id?: SortOrder
     borrow_date?: SortOrder
+    due_date?: SortOrder
     return_date?: SortOrder
     created_at?: SortOrder
+    penalty_amount?: SortOrder
+    penalty_status?: SortOrder
   }
 
   export type User_BookSumOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
     book_id?: SortOrder
+    penalty_amount?: SortOrder
+  }
+
+  export type EnumStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.Status | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumStatusNullableFilter<$PrismaModel>
+    _max?: NestedEnumStatusNullableFilter<$PrismaModel>
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6714,6 +6855,10 @@ export namespace Prisma {
     create?: XOR<BookCreateWithoutBorrowed_byInput, BookUncheckedCreateWithoutBorrowed_byInput>
     connectOrCreate?: BookCreateOrConnectWithoutBorrowed_byInput
     connect?: BookWhereUniqueInput
+  }
+
+  export type NullableEnumStatusFieldUpdateOperationsInput = {
+    set?: $Enums.Status | null
   }
 
   export type UserUpdateOneRequiredWithoutBorrowed_booksNestedInput = {
@@ -6862,10 +7007,30 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedEnumStatusNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumStatusNullableFilter<$PrismaModel> | $Enums.Status | null
+  }
+
+  export type NestedEnumStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.Status[] | ListEnumStatusFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.Status | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumStatusNullableFilter<$PrismaModel>
+    _max?: NestedEnumStatusNullableFilter<$PrismaModel>
+  }
+
   export type User_BookCreateWithoutUserInput = {
     borrow_date?: Date | string
+    due_date: Date | string
     return_date?: Date | string | null
     created_at?: Date | string
+    penalty_amount?: number
+    penalty_status?: $Enums.Status | null
     book: BookCreateNestedOneWithoutBorrowed_byInput
   }
 
@@ -6873,8 +7038,11 @@ export namespace Prisma {
     id?: number
     book_id: number
     borrow_date?: Date | string
+    due_date: Date | string
     return_date?: Date | string | null
     created_at?: Date | string
+    penalty_amount?: number
+    penalty_status?: $Enums.Status | null
   }
 
   export type User_BookCreateOrConnectWithoutUserInput = {
@@ -6911,14 +7079,20 @@ export namespace Prisma {
     user_id?: IntFilter<"User_Book"> | number
     book_id?: IntFilter<"User_Book"> | number
     borrow_date?: DateTimeFilter<"User_Book"> | Date | string
+    due_date?: DateTimeFilter<"User_Book"> | Date | string
     return_date?: DateTimeNullableFilter<"User_Book"> | Date | string | null
     created_at?: DateTimeFilter<"User_Book"> | Date | string
+    penalty_amount?: IntFilter<"User_Book"> | number
+    penalty_status?: EnumStatusNullableFilter<"User_Book"> | $Enums.Status | null
   }
 
   export type User_BookCreateWithoutBookInput = {
     borrow_date?: Date | string
+    due_date: Date | string
     return_date?: Date | string | null
     created_at?: Date | string
+    penalty_amount?: number
+    penalty_status?: $Enums.Status | null
     user: UserCreateNestedOneWithoutBorrowed_booksInput
   }
 
@@ -6926,8 +7100,11 @@ export namespace Prisma {
     id?: number
     user_id: number
     borrow_date?: Date | string
+    due_date: Date | string
     return_date?: Date | string | null
     created_at?: Date | string
+    penalty_amount?: number
+    penalty_status?: $Enums.Status | null
   }
 
   export type User_BookCreateOrConnectWithoutBookInput = {
@@ -7068,14 +7245,20 @@ export namespace Prisma {
     id?: number
     book_id: number
     borrow_date?: Date | string
+    due_date: Date | string
     return_date?: Date | string | null
     created_at?: Date | string
+    penalty_amount?: number
+    penalty_status?: $Enums.Status | null
   }
 
   export type User_BookUpdateWithoutUserInput = {
     borrow_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_date?: DateTimeFieldUpdateOperationsInput | Date | string
     return_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    penalty_amount?: IntFieldUpdateOperationsInput | number
+    penalty_status?: NullableEnumStatusFieldUpdateOperationsInput | $Enums.Status | null
     book?: BookUpdateOneRequiredWithoutBorrowed_byNestedInput
   }
 
@@ -7083,30 +7266,42 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     book_id?: IntFieldUpdateOperationsInput | number
     borrow_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_date?: DateTimeFieldUpdateOperationsInput | Date | string
     return_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    penalty_amount?: IntFieldUpdateOperationsInput | number
+    penalty_status?: NullableEnumStatusFieldUpdateOperationsInput | $Enums.Status | null
   }
 
   export type User_BookUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     book_id?: IntFieldUpdateOperationsInput | number
     borrow_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_date?: DateTimeFieldUpdateOperationsInput | Date | string
     return_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    penalty_amount?: IntFieldUpdateOperationsInput | number
+    penalty_status?: NullableEnumStatusFieldUpdateOperationsInput | $Enums.Status | null
   }
 
   export type User_BookCreateManyBookInput = {
     id?: number
     user_id: number
     borrow_date?: Date | string
+    due_date: Date | string
     return_date?: Date | string | null
     created_at?: Date | string
+    penalty_amount?: number
+    penalty_status?: $Enums.Status | null
   }
 
   export type User_BookUpdateWithoutBookInput = {
     borrow_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_date?: DateTimeFieldUpdateOperationsInput | Date | string
     return_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    penalty_amount?: IntFieldUpdateOperationsInput | number
+    penalty_status?: NullableEnumStatusFieldUpdateOperationsInput | $Enums.Status | null
     user?: UserUpdateOneRequiredWithoutBorrowed_booksNestedInput
   }
 
@@ -7114,16 +7309,22 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     user_id?: IntFieldUpdateOperationsInput | number
     borrow_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_date?: DateTimeFieldUpdateOperationsInput | Date | string
     return_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    penalty_amount?: IntFieldUpdateOperationsInput | number
+    penalty_status?: NullableEnumStatusFieldUpdateOperationsInput | $Enums.Status | null
   }
 
   export type User_BookUncheckedUpdateManyWithoutBookInput = {
     id?: IntFieldUpdateOperationsInput | number
     user_id?: IntFieldUpdateOperationsInput | number
     borrow_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    due_date?: DateTimeFieldUpdateOperationsInput | Date | string
     return_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    penalty_amount?: IntFieldUpdateOperationsInput | number
+    penalty_status?: NullableEnumStatusFieldUpdateOperationsInput | $Enums.Status | null
   }
 
 

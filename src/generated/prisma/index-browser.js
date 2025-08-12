@@ -154,8 +154,11 @@ exports.Prisma.User_BookScalarFieldEnum = {
   user_id: 'user_id',
   book_id: 'book_id',
   borrow_date: 'borrow_date',
+  due_date: 'due_date',
   return_date: 'return_date',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  penalty_amount: 'penalty_amount',
+  penalty_status: 'penalty_status'
 };
 
 exports.Prisma.SortOrder = {
@@ -172,7 +175,10 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.Status = exports.$Enums.Status = {
+  PAID: 'PAID',
+  UNPAID: 'UNPAID'
+};
 
 exports.Prisma.ModelName = {
   Admin: 'Admin',

@@ -11,6 +11,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Status {
+  PAID
+  UNPAID
+}
+
 model Admin {
   id         Int      @id @default(autoincrement())
   first_name String
@@ -43,12 +48,15 @@ model Book {
 }
 
 model User_Book {
-  id          Int       @id @default(autoincrement())
-  user_id     Int
-  user        User      @relation(fields: [user_id], references: [id])
-  book_id     Int
-  book        Book      @relation(fields: [book_id], references: [id])
-  borrow_date DateTime  @default(now())
-  return_date DateTime?
-  created_at  DateTime  @default(now())
+  id             Int       @id @default(autoincrement())
+  user_id        Int
+  user           User      @relation(fields: [user_id], references: [id])
+  book_id        Int
+  book           Book      @relation(fields: [book_id], references: [id])
+  borrow_date    DateTime  @default(now())
+  due_date       DateTime
+  return_date    DateTime?
+  created_at     DateTime  @default(now())
+  penalty_amount Int       @default(0)
+  penalty_status Status?
 }

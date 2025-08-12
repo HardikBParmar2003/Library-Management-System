@@ -12,7 +12,6 @@ export const bookService = {
   },
 
   async getBookById(id: number) {
-    ``;
     try {
       return await bookRepository.getBookById(id);
     } catch (error) {
