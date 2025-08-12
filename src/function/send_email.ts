@@ -1,6 +1,8 @@
 import { Book, User } from "../generated/prisma";
 import nodemailer from "nodemailer";
 import { UserBook } from "../interface/userbook.interface";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const sendEmail = {
   async sendBorrowBook(user: User, book: Book, borrowBook: UserBook) {
@@ -8,8 +10,8 @@ export const sendEmail = {
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "projectmanagement760@gmail.com",
-          pass: "vkpq qkmo mhvk ovzb",
+          user: process.env.USER,
+          pass: process.env.PASS,
         },
       });
 
