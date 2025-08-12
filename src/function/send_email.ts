@@ -3,14 +3,13 @@ import nodemailer from "nodemailer";
 import { UserBook } from "../interface/userbook.interface";
 import dotenv from "dotenv";
 dotenv.config();
-
 export const sendEmail = {
   async sendBorrowBook(user: User, book: Book, borrowBook: UserBook) {
     try {
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: process.env.USER,
+          user: process.env.EMAIL,
           pass: process.env.PASS,
         },
       });
@@ -118,6 +117,7 @@ export const sendEmail = {
         `,
       });
     } catch (error) {
+      console.log(error);
       throw new Error("Error while sending email or incorrect email");
     }
   },
